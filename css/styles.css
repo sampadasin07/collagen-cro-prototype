@@ -193,3 +193,165 @@ body.has-sticky { padding-bottom: 132px; }
   body.has-sticky { padding-bottom: 0; }
   .checkout { grid-template-columns: 1.3fr 1fr; align-items: start; }
 }
+
+/* =====================================================================
+   Visual polish layer (presentation only)
+   Added after the original rules so it is easy to review or remove.
+   No selectors here change behaviour, content, IDs, names or routes.
+   ===================================================================== */
+:root {
+  --surface: #F6F9F8; --hairline: #E2EAE8; --deep-hover: #0A2F36; --teal-soft: #E4F1EF;
+  --shadow-sm: 0 1px 2px rgba(15, 61, 69, .06), 0 1px 4px rgba(15, 61, 69, .04);
+  --shadow-md: 0 6px 18px rgba(15, 61, 69, .10);
+  --ease: 160ms ease;
+}
+
+/* Typography: system UI stack for crisper rendering on each platform */
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+h1, h2, h3 { letter-spacing: -.01em; }
+h1 { line-height: 1.22; }
+.subtitle { line-height: 1.5; }
+a { text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color var(--ease); }
+a:hover { color: var(--deep); }
+
+/* Header */
+.proto-note { letter-spacing: .01em; }
+.site-header { box-shadow: 0 1px 0 rgba(15, 61, 69, .03); }
+.brand { font-size: 1.1rem; }
+
+/* Buttons: consistent radius, hover/press feedback */
+.btn { border-radius: 10px; letter-spacing: .01em; line-height: 1.2; text-align: center;
+  transition: background-color var(--ease), border-color var(--ease), color var(--ease), box-shadow var(--ease), transform 80ms ease; }
+.btn-primary:hover { background: var(--deep-hover); border-color: var(--deep-hover); color: #fff; box-shadow: var(--shadow-md); }
+.btn-secondary:not([aria-pressed="true"]):hover { background: var(--mist); color: var(--deep); }
+.btn[aria-pressed="true"]:hover { background: #0C5C63; border-color: #0C5C63; color: #fff; }
+.btn:active { transform: translateY(1px); }
+.filters .btn { border-radius: 999px; padding-left: 18px; padding-right: 18px; }
+
+/* Gallery: centred illustration, background matched to the artwork */
+.gallery { background: #EEF4F3; border: 1px solid var(--hairline); }
+.gallery img { width: 100%; max-width: 460px; margin: 0 auto; }
+.gallery figcaption { text-align: center; padding: 10px 14px 12px; }
+
+/* Product advantages */
+.buybox h2 { font-size: 1.15rem; margin-bottom: 10px; }
+.benefits li { background: var(--surface); border: 1px solid var(--hairline); color: var(--deep); line-height: 1.35; padding: 12px 10px; }
+@media (min-width: 600px) { .benefits { grid-template-columns: repeat(3, 1fr); } }
+
+/* Price block */
+.price-block { padding: 16px 18px; box-shadow: var(--shadow-sm); background: #fff; }
+.price-row { row-gap: 4px; }
+.price-now { font-size: 2.05rem; letter-spacing: -.02em; line-height: 1.1; }
+.price-off { background: var(--teal-soft); border-radius: 999px; padding: 1px 10px; font-size: 14px; }
+.per-pack-note { margin: 6px 0 0; }
+.price-online { margin-top: 10px; }
+
+/* Disclosure panels */
+details.panel { box-shadow: var(--shadow-sm); transition: border-color var(--ease); }
+details.panel > summary { border-radius: calc(var(--radius) - 1px); transition: background-color var(--ease); }
+details.panel > summary:hover { background: var(--surface); }
+details.panel[open] > summary { border-bottom: 1px solid var(--hairline); border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 12px; }
+details.panel > summary::after { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--mist); display: inline-flex; align-items: center; justify-content: center; font-size: 20px; }
+.panel-body { line-height: 1.55; }
+.suit-list li { margin-bottom: 12px; }
+.suit-list li:last-child { margin-bottom: 0; }
+
+/* Pack selector: visible radio indicator, hover and selected states */
+fieldset.packs legend { font-size: 1.05rem; margin-bottom: 10px; }
+.pack-options { gap: 10px; }
+.pack label { position: relative; padding: 12px 16px 12px 48px; line-height: 1.4;
+  transition: border-color var(--ease), background-color var(--ease), box-shadow var(--ease); }
+.pack label::before { content: ""; position: absolute; left: 16px; top: 50%; width: 20px; height: 20px; margin-top: -10px;
+  border: 2px solid #9DB2AF; border-radius: 50%; background: #fff; transition: border-color var(--ease), box-shadow var(--ease), background-color var(--ease); }
+.pack label:hover { border-color: #9DB2AF; box-shadow: var(--shadow-sm); }
+.pack input:checked + label { background: #F1F8F7; box-shadow: inset 0 0 0 1px var(--deep), var(--shadow-sm); }
+.pack input:checked + label::before { border-color: var(--deep); background: var(--deep); box-shadow: inset 0 0 0 4px #fff; }
+.pack label .pack-price b { font-size: 1.1rem; color: var(--deep); }
+.pack .tag.offer { margin-top: 5px; border-radius: 999px; padding: 1px 8px; background: var(--teal-soft); }
+.per-day { margin-top: 12px; }
+
+/* Primary call-to-action row */
+.cta-row { gap: 12px; }
+.cta-row .btn { min-height: 52px; font-size: 17px; }
+
+/* Review summary near the buy box */
+.featured-review { padding: 14px 16px; box-shadow: var(--shadow-sm); }
+
+/* Content sections */
+.section { padding: 36px 0; }
+.usage { box-shadow: var(--shadow-sm); line-height: 1.45; }
+.quick-facts { gap: 10px; }
+.quick-facts li { background: var(--surface); border-color: var(--hairline); padding: 14px 10px; display: flex; flex-direction: column; justify-content: center; line-height: 1.4; }
+.quick-facts b { font-size: 1.05rem; margin-bottom: 2px; }
+@media (max-width: 1023px) { .quick-facts li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+.ev-card { padding: 18px; box-shadow: var(--shadow-sm); background: #fff; }
+.ev-card h3 { font-size: 1.1rem; }
+.study { padding: 12px 0; line-height: 1.45; }
+.lab-list li { margin-bottom: 4px; }
+table.nutrition th { background: var(--surface); color: var(--deep); font-size: 14px; padding: 8px 8px; }
+table.nutrition td { padding: 8px 8px; }
+
+/* Reviews */
+.review-summary { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 18px; }
+.avg { font-size: 2.6rem; letter-spacing: -.02em; }
+.bar { height: 8px; border-radius: 999px; background: #E3EBE9; }
+.bar i { border-radius: 999px; }
+.review { padding: 16px 0; }
+.review p { line-height: 1.55; }
+.badge-verified { background: var(--teal-soft); color: var(--teal); font-weight: 700; border-radius: 999px; padding: 1px 8px; }
+
+/* FAQ */
+.faq details.panel { margin-bottom: 10px; }
+
+/* Footer */
+.site-footer { background: var(--surface); }
+
+/* Sticky quick-buy bar */
+.sticky-bar { background: #fff;
+  box-shadow: 0 -6px 20px rgba(15, 61, 69, .08); padding-top: 10px; }
+.sticky-bar select { -webkit-appearance: none; appearance: none; padding-right: 36px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%230F3D45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; transition: border-color var(--ease); }
+.sticky-bar select:hover { border-color: #9DB2AF; }
+@media (min-width: 768px) {
+  /* Tablet and laptop: one compact row aligned to the page width */
+  .sticky-bar { grid-template-columns: minmax(0, 1fr) 170px 170px; gap: 12px;
+    padding-left: max(16px, calc((100% - 1180px) / 2 + 16px)); padding-right: max(16px, calc((100% - 1180px) / 2 + 16px)); }
+  .sticky-info { grid-column: 1; grid-template-columns: auto minmax(0, 360px); justify-content: start; }
+  body.has-sticky { padding-bottom: 96px; }
+}
+
+/* Forms (checkout) */
+input[type="radio"], input[type="checkbox"] { accent-color: var(--deep); }
+.field input, .field textarea { transition: border-color var(--ease), box-shadow var(--ease); }
+.field input:hover, .field textarea:hover { border-color: #B5C6C3; }
+.field input:focus, .field textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(15, 107, 115, .14); }
+.field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { background: #FFF9F7; }
+.field input[aria-invalid="true"]:focus, .field textarea[aria-invalid="true"]:focus { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(200, 85, 61, .14); }
+.choice { transition: border-color var(--ease), background-color var(--ease); }
+.choice:hover { border-color: #9DB2AF; }
+.card { padding: 20px; box-shadow: var(--shadow-sm); background: #fff; }
+.card h2 { font-size: 1.2rem; margin-bottom: 14px; }
+.notice { border-left: 4px solid var(--teal); }
+.order-line { padding: 7px 0; }
+.order-total { margin-top: 8px; padding-top: 12px; }
+
+/* About page tables */
+.about th { padding: 10px 12px; }
+.about td { padding: 10px 12px; }
+.about tbody tr:nth-child(even) td { background: var(--surface); }
+
+@media (min-width: 1024px) {
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.45rem; }
+  .buybox h2, .card h2 { font-size: 1.2rem; }
+  .section { padding: 48px 0; }
+  .gallery img { max-width: 520px; }
+  .review-summary { padding: 22px 26px; }
+  .checkout > aside.card { position: sticky; top: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+  .btn:active { transform: none; }
+}
