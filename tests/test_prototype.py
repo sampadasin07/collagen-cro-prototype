@@ -43,7 +43,9 @@ async def main():
         rec('Free shipping shown', 'Free shipping on this order' in await pg.text_content('.price-block'))
         rec('Per-day line', 'Every pack works out to about ₹58 a day.' in await pg.text_content('.per-day'))
         labels = await pg.eval_on_selector_all('.pack-name', 'els => els.map(e => e.textContent)')
-        rec('Pack labels exact', labels == ['1 tub · 25 days','2 tubs · 50 days','3 tubs · 75 days','4 tubs · 100 days'], str(labels))
+        rec('Pack labels exact', labels == ['1 tub · 25 days','2 tubs · 50 days','3 tubs · 75 days','4 tubs · 100 days · Recommended'], str(labels))
+        rec('Every pack shows cost per day', (await pg.eval_on_selector_all('.pack-day', 'e=>e.map(x=>x.textContent)')) == ['about ₹58 a day'] * 4)
+        rec('COD price is identified', 'COD price' in await pg.text_content('.price-block'))
         expected = {1:('₹1,439','₹1,799'),2:('₹2,878','₹3,598'),3:('₹4,318','₹5,397'),4:('₹5,757','₹7,196')}
         for t,(pr,mrp) in expected.items():
             await pg.click(f'label[for=pack-{t}]')
@@ -52,9 +54,10 @@ async def main():
             ok &= (await pg.input_value('#sticky-select')) == str(t)
             ok &= f'tubs={t}' in pg.url
             online = await pg.text_content('#price-online')
-            ok &= ('[V]' in online) if t > 1 else ('₹1,367' in online)
+            expected_online = {1: '₹1,367', 2: '₹2,734', 3: '₹4,102', 4: '₹5,469'}[t]
+            ok &= expected_online in online
             rec(f'Select pack {t}: price, MRP, sticky, URL, online line', ok, online.strip())
-        rec('Recommended only on 4 tubs', (await pg.eval_on_selector_all('.pack .tag:not(.offer)', 'e=>e.length')) == 1 and 'Recommended' in await pg.text_content('label[for=pack-4]'))
+        rec('Recommended is part of the 4-tub label', '4 tubs · 100 days · Recommended' in await pg.text_content('label[for=pack-4]'))
         rec('Course note marked [V] when 4 tubs', await pg.is_visible('#course-note') and '[V]' in await pg.text_content('#course-note'))
         # keyboard radio
         await pg.click('label[for=pack-1]'); await pg.focus('#pack-1'); await pg.keyboard.press('ArrowDown')
@@ -67,13 +70,16 @@ async def main():
         rec('Suitability open on laptop', await pg.eval_on_selector('#suitability', 'e=>e.open'))
         st = await pg.text_content('#suitability')
         rec('Suitability text complete', all(s in st for s in ['Made from fish','allergic to fish or shellfish','Consult your doctor first','Best before:','[V] MM/YYYY','Replacement if damaged or incorrect (report within 48 hours)','See our vegan collagen']))
-        rec('No fish species named', not re.search(r'salmon|tilapia|cod\b|pollock', (await pg.evaluate('document.body.innerText')).lower()))
+        rec('No fish species named', not re.search(r'\b(salmon|tilapia|pollock)\b', (await pg.text_content('#suitability')).lower()))
         # evidence below benefits
-        order = await pg.evaluate("[...document.querySelectorAll('.benefits, #evidence')].map(e=>e.className||e.id)")
-        pos = await pg.evaluate("(()=>{const a=document.querySelector('.benefits').getBoundingClientRect().bottom+scrollY;const b=document.querySelector('#evidence').getBoundingClientRect().top+scrollY;return b-a})()")
-        rec('Evidence module directly below benefit icons', 0 <= pos < 120, f'gap {pos:.0f}px')
+        pos = await pg.evaluate("(()=>{const a=document.querySelector('#ctas').getBoundingClientRect().bottom+scrollY;const b=document.querySelector('#evidence').getBoundingClientRect().top+scrollY;const c=document.querySelector('#reviews').getBoundingClientRect().top+scrollY;return {gap:b-a,beforeReviews:b<c}})()")
+        rec('Evidence module follows purchase actions and precedes reviews', pos['gap'] >= 0 and pos['beforeReviews'], str(pos))
         ev = await pg.text_content('#evidence')
-        rec('Usage line exact', 'Take one 8 g scoop daily, for a minimum of 3–4 months.' in ev)
+        rec('Product facts heading stays with evidence', 'Product facts & testing' in ev)
+        usage = await pg.text_content('.usage')
+        rec('Usage line exact', usage.strip().endswith('One 8 g scoop daily, minimum 3–4 months.'))
+        order = await pg.evaluate("""(()=>{const sel=['#offers','.usage','#suitability']; return sel.map(s=>document.querySelector(s).getBoundingClientRect().top+scrollY)})()""")
+        rec('Usage line follows offers and precedes suitability', order == sorted(order), str(order))
         rec('Quick facts present', all(s in ev for s in ['8 g','25','Type I & III','Unflavoured','How to mix']))
         rec('Ingredient vs product sections', 'Research on marine collagen peptides (ingredient studies)' in ev and 'Tested on this product' in ev)
         rec('Correct publishers', 'Journal of Cosmetic Dermatology (Wiley)' in ev and 'Journal of Medicinal Food (Mary Ann Liebert)' in ev)
@@ -86,9 +92,9 @@ async def main():
         rec('Every review shows a date or [V] date', (await pg.eval_on_selector_all('#review-list .review','e=>e.length')) == (await pg.eval_on_selector_all('#review-list .review-date','e=>e.filter(x=>x.textContent.trim()).length')))
         rec('Default filter is All', (await pg.get_attribute('[data-filter=all]','aria-pressed')) == 'true')
         await pg.click('[data-filter=critical]')
-        rec('Critical filter shows only ≤3★ or empty state', 'No critical reviews yet.' in await pg.text_content('#review-list'))
+        rec('Critical filter shows only ≤3★ reviews', (await pg.eval_on_selector_all('#review-list .review-head .stars', 'e=>e.map(x=>x.getAttribute("aria-label"))')) == ['3 out of 5 stars'])
         await pg.click('[data-filter=all]')
-        rec('All filter restores 4 reviews', (await pg.eval_on_selector_all('#review-list .review','e=>e.length')) == 4)
+        rec('All filter restores every captured review', (await pg.eval_on_selector_all('#review-list .review','e=>e.length')) == 5)
         rec('Featured review near buy box', 'Vikash M' in await pg.text_content('#featured-review'))
         rec('No exit pop-up (no dialogs/modals in DOM)', (await pg.eval_on_selector_all('dialog, [role=dialog], .modal, .popup','e=>e.length')) == 0)
         # what changed
@@ -119,8 +125,10 @@ async def main():
             ok = (await pg.text_content('#sum-price')) == pr and (await pg.text_content('#sum-total')) == pr and (await pg.text_content('#price-cod')) == pr
             await pg.check('input[value=online]')
             tot = await pg.text_content('#sum-total')
-            ok &= (tot == '₹1,367') if t == 1 else (tot == pr and await pg.is_visible('#sum-note'))
-            rec(f'Checkout pack {t}: COD {pr}, online {"₹1,367" if t==1 else "pack price + [V]"}', ok)
+            ok &= (tot == '₹1,367') if t == 1 else (tot != pr and not await pg.is_visible('#sum-note'))
+            online_expected = {1: '₹1,367', 2: '₹2,734', 3: '₹4,102', 4: '₹5,469'}[t]
+            ok &= tot == online_expected
+            rec(f'Checkout pack {t}: COD {pr}, online {online_expected}', ok)
             await ctx.close()
         ctx, pg = await page_at(1280, url='checkout.html?tubs=4')
         rec('Notice text exact', (await pg.text_content('.notice')).strip() == 'Prototype: no payment is taken.')
@@ -139,7 +147,7 @@ async def main():
         await pg.fill('#phone','9876543210'); await pg.check('input[value=online]')
         await pg.click('button[type=submit]'); await pg.wait_for_load_state('networkidle')
         ct = await pg.evaluate('document.body.innerText')
-        rec('Confirmation restates pack, method, total', 'confirmation.html?tubs=4&pay=online' in pg.url and '4 tubs · 100 days' in ct and 'Pay online' in ct and '₹5,757' in ct and '[V]' in ct)
+        rec('Confirmation restates pack, method, total', 'confirmation.html?tubs=4&pay=online' in pg.url and '4 tubs · 100 days' in ct and 'Pay online' in ct and '₹5,469' in ct and '[V]' not in ct)
         rec('No personal data in confirmation URL', 'Test' not in pg.url and '9876' not in pg.url)
         await ctx.close()
         ctx, pg = await page_at(1280, url='confirmation.html?tubs=1&pay=online')
@@ -169,16 +177,30 @@ async def main():
             fs = await pg.evaluate("parseFloat(getComputedStyle(document.body).fontSize)")
             rec(f'Body text 16px @{w}', fs >= 16)
             sticky = await pg.is_visible('#sticky-bar')
-            rec(f'Sticky bar {"shown" if w<1024 else "hidden"} @{w}', sticky == (w < 1024))
+            if w >= 1024:
+                cta_visible = await pg.evaluate("""(()=>{const r=document.querySelector('#ctas').getBoundingClientRect(); return r.bottom > 0 && r.top < window.innerHeight})()""")
+                rec(f'Desktop sticky matches CTA visibility @{w}', sticky == (not cta_visible))
+                await pg.evaluate("document.querySelector('#ctas').scrollIntoView({block:'center'})")
+                await pg.wait_for_timeout(100)
+                rec(f'Desktop sticky hides while CTAs are visible @{w}', not await pg.is_visible('#sticky-bar'))
+                await pg.evaluate('window.scrollTo(0, document.body.scrollHeight)')
+                await pg.wait_for_timeout(100)
+                rec(f'Desktop sticky bar appears after CTAs leave view @{w}', await pg.is_visible('#sticky-bar'))
+                await pg.evaluate('window.scrollTo(0, 0)')
+                await pg.wait_for_timeout(100)
+            else:
+                rec(f'Sticky bar shown @{w}', sticky)
             susp = await pg.eval_on_selector('#suitability','e=>e.open')
             rec(f'Suitability {"open" if w>=1024 else "collapsed"} @{w}', susp == (w >= 1024))
             if w < 1024:
-                order = await pg.evaluate("""(()=>{const sel=['.gallery','h1','.rating-line','.price-block','#offers','#suitability','.packs','#ctas','#evidence','#reviews','#faq'];
+                order = await pg.evaluate("""(()=>{const sel=['.gallery','h1','.rating-line','.benefits','.price-block','#offers','.usage','#suitability','.packs','#ctas','#evidence','#reviews','#faq'];
                   return sel.map(s=>document.querySelector(s).getBoundingClientRect().top+scrollY)})()""")
-                rec(f'Mobile order gallery→title→rating→price→offers→suitability→packs→CTAs→evidence→reviews→FAQ @{w}', order == sorted(order))
+                rec(f'Mobile order gallery→title→rating→advantages→price→offers→usage→suitability→packs→CTAs→evidence→reviews→FAQ @{w}', order == sorted(order))
                 # sticky select drives state
                 await pg.select_option('#sticky-select','4')
                 rec(f'Sticky select updates main selector @{w}', await pg.is_checked('#pack-4') and (await pg.text_content('#price-now')) == '₹5,757')
+                await pg.click('#sticky-add-to-cart')
+                rec(f'Sticky Add to cart uses selected pack @{w}', '4 tubs · 100 days' in await pg.text_content('#cart-status'))
                 # footer reachable above sticky bar
                 await pg.evaluate('window.scrollTo(0, document.body.scrollHeight)')
                 ok = await pg.evaluate("""(()=>{const f=document.querySelector('.site-footer a').getBoundingClientRect();const s=document.getElementById('sticky-bar').getBoundingClientRect();return f.bottom<=s.top})()""")

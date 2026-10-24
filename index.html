@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pure Korean Marine Collagen Peptides · Improved product page (prototype)</title>
+<title>Pure Korean Marine Collagen Peptides for Women &amp; Men · Improved product page (prototype)</title>
 <meta name="description" content="CRO case-study prototype of an improved product page. Not the official website.">
 <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -41,7 +41,7 @@
 
       <!-- 2. Title -->
       <div>
-        <h1>Pure Korean Marine Collagen Peptides | Unflavoured | Combat Signs of Ageing</h1>
+        <h1>Pure Korean Marine Collagen Peptides | Unflavoured | For Women &amp; Men | Combat Signs of Ageing</h1>
         <p class="subtitle">Hydrolysed Type I &amp; III collagen peptides from deep-sea fish · 8 g per serving · 200 g tub</p>
       </div>
 
@@ -51,6 +51,20 @@
         <span><b id="avg-inline">4.74</b>/5 from <span id="count-inline">571</span> ratings</span>
         <a href="#reviews">Read reviews</a>
       </div>
+
+      <!-- 4. Product advantages -->
+      <section aria-labelledby="benefits-h">
+        <h2 id="benefits-h">Product advantages</h2>
+        <ul class="benefits">
+          <li>Reduce signs of ageing</li>
+          <li>Enhances skin firmness &amp; elasticity</li>
+          <li>Improves skin hydration</li>
+          <li>Smooths and refines skin texture</li>
+          <li>Supports the collagen density</li>
+          <li>Enhances joint health</li>
+        </ul>
+        <p class="disclaimer" style="margin-top:10px">*Claims are ingredient-based and not for the product.</p>
+      </section>
 
       <!-- 4. Price -->
       <details class="chg">
@@ -63,6 +77,7 @@
       <section class="price-block" aria-label="Price">
         <div class="price-row">
           <span class="price-now" id="price-now">₹1,439</span>
+          <span class="price-type">COD price</span>
           <span class="price-mrp">MRP <s id="price-mrp">₹1,799</s></span>
           <span class="price-off">20% off</span>
         </div>
@@ -78,7 +93,7 @@
           <ul>
             <li><b>Flat 20% off</b> MRP: already included in the price above.</li>
             <li><b>Extra 5% off on online (prepaid) payment:</b> <span id="offer-online">₹1,367 for 1 tub</span>.</li>
-            <li><b>Member price ₹1,367</b> for 1 tub (join the membership).</li>
+            <li><b>Member price ₹1,367</b> for 1 tub (join the membership) + free Beauty Collagen Strawberry Watermelon Flavor Gift Sachets (box of 6).</li>
             <li><b>Get 10% OFF</b> sign-up offer: <span class="v">[V] terms to be confirmed</span></li>
           </ul>
           <p class="v-note" style="margin-top:10px"><span class="v">[V]</span> Which of these offers can be combined is being confirmed with the brand. Stacking rules will be stated here.</p>
@@ -136,20 +151,6 @@
     </div>
   </div>
 
-  <!-- Benefit icons (existing) -->
-  <section class="section" aria-labelledby="benefits-h">
-    <h2 id="benefits-h" class="visually-hidden">Benefits</h2>
-    <ul class="benefits">
-      <li>Reduce signs of ageing</li>
-      <li>Enhances skin firmness &amp; elasticity</li>
-      <li>Improves skin hydration</li>
-      <li>Smooths and refines skin texture</li>
-      <li>Supports the collagen density</li>
-      <li>Enhances joint health</li>
-    </ul>
-    <p class="disclaimer" style="margin-top:10px">*Claims are ingredient-based and not for the product.</p>
-  </section>
-
   <!-- 9. Evidence module (directly below the benefit icons) -->
   <section class="section" id="evidence" aria-labelledby="evidence-h">
     <details class="chg">
@@ -159,8 +160,8 @@
         <p style="margin:0"><b>Friction addressed:</b> Friction 1 (the evidence isn’t believable: claims contradicted each other).</p>
       </div>
     </details>
-    <h2 id="evidence-h">What it is and how to use it</h2>
-    <p class="usage"><strong>How to use</strong>Take one 8 g scoop daily, for a minimum of 3–4 months.</p>
+    <h2 id="evidence-h">Product facts &amp; testing</h2>
+    <p class="usage"><strong>How to use</strong>One 8 g scoop daily, minimum 3–4 months.</p>
     <ul class="quick-facts" aria-label="Quick facts">
       <li><b>8 g</b><span>per scoop</span></li>
       <li><b>25</b><span>servings per tub</span></li>
@@ -253,7 +254,7 @@
     <details class="panel"><summary>What are marine collagen peptides?</summary>
       <div class="panel-body"><p style="margin:0">Short chains of amino acids made from fish skin or scales, rich in Type I and Type III collagen.</p></div></details>
     <details class="panel"><summary>How much should I take, and for how long?</summary>
-      <div class="panel-body"><p style="margin:0">Take one 8 g scoop daily, for a minimum of 3–4 months.</p></div></details>
+      <div class="panel-body"><p style="margin:0">One 8 g scoop daily, minimum 3–4 months.</p></div></details>
     <details class="panel"><summary>Can I mix it into hot drinks?</summary>
       <div class="panel-body"><p style="margin:0">Yes. It dissolves in hot or cold drinks such as coffee, tea, juice or smoothies.</p></div></details>
     <details class="panel"><summary>Can vegetarians use this collagen?</summary>
@@ -269,12 +270,13 @@
 </footer>
 
 <!-- Sticky bar (phone only) -->
-<div class="sticky-bar" id="sticky-bar" aria-label="Quick buy">
-  <div>
+<div class="sticky-bar" id="sticky-bar" aria-label="Quick buy" aria-hidden="false">
+  <div class="sticky-info">
     <label for="sticky-select">Pack</label>
     <select id="sticky-select"><!-- rendered --></select>
     <div class="sticky-price" id="sticky-price">₹1,439</div>
   </div>
+  <button type="button" class="btn btn-secondary" id="sticky-add-to-cart">Add to cart</button>
   <a class="btn btn-primary" id="sticky-buy" href="checkout.html?tubs=1">Buy it now</a>
 </div>
 

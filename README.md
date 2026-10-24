@@ -30,7 +30,7 @@ The selected pack is stored in the URL (`index.html?tubs=3` → `checkout.html?t
 |---|---|---|
 | 1 | Stock count, "allergen-free", MDPI logos, exit pop-up, other timelines, absorption multipliers, "Clinically Proven", "Backed by 20+", second nutrition panel removed; Buy It Now goes straight to checkout | Implemented and tested |
 | 2 | Evidence module below benefit icons: usage line, quick facts (2 columns on phone), one nutrition panel with [V] values, ingredient studies with correct publishers, "Tested on this product" with what reports show and don't | Implemented and tested. Lab-report links are a [V] placeholder because the URLs weren't available |
-| 3 | Four duration-labelled packs from `data.js`, 1 tub default, "Recommended" on 4 tubs, ₹58/day line, prices and "Save 20%" labels kept, one shared state across radios, sticky bar, price and checkout; optional course note shown with [V] | Implemented and tested |
+| 3 | Four duration-labelled packs from `data.js`, 1 tub default, "4 tubs · 100 days · Recommended", ₹58/day on every pack, prices and "Save 20%" labels kept, one shared state across radios, sticky bar, price and checkout; optional course note shown with [V] | Implemented and tested |
 | 4 | ₹1,439 / MRP ₹1,799; "₹1,367 when you pay online" for 1 tub, [V] for 2–4 tubs; one collapsible "Offers that apply" with 10% OFF, member price, banner offer and [V] stacking rules; free shipping line | Implemented and tested |
 | 5 | Non-veg symbol + "Made from fish", allergy line, doctor note, best-before [V], replacement policy + link, vegan link; open on laptop, collapsible on phone; no species named | Implemented and tested |
 | 6 | 4.74 / 571 / 424-146-1-0-0; real review near the buy box; [V] dates; "Critical" filter (not default) with "No critical reviews yet"; no marketplace or invented reviews | Implemented and tested |
@@ -55,7 +55,7 @@ Run `tests/test_prototype.py` against a local server on port 8765 (it needs Play
 - **Screen readers:** not tested, beyond semantic markup and keyboard checks.
 
 ## Unresolved items ([V] placeholders)
-- **Product data:** nutrition values (7.9 g vs 7.45 g protein); online price for 2–4 tubs; offer-stacking rules and "Get 10% OFF" terms; batch best-before date; whether 100 days "covers the 3–4 month course" (100 days covers only the 3-month minimum).
+- **Product data:** nutrition values (7.9 g vs 7.45 g protein); offer-stacking rules and "Get 10% OFF" terms; batch best-before date; whether 100 days "covers the 3–4 month course" (100 days covers only the 3-month minimum).
 - **Reviews:** review dates, and the text of the single 3★ rating.
 - **Evidence:** lab-report links, full study citations, and the publisher of *Orthopedic Reviews*.
 - **Deck:** the deck URL.

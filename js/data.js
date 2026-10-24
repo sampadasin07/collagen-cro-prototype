@@ -5,9 +5,9 @@ window.WN = {
   PRICES_OBSERVED: '21 Oct 2026',
   PACKS: [
     { tubs: 1, days: 25,  price: 1439, mrp: 1799, onlinePrice: 1367, label: '1 tub · 25 days',  isDefault: true },
-    { tubs: 2, days: 50,  price: 2878, mrp: 3598, onlinePrice: null, label: '2 tubs · 50 days' },
-    { tubs: 3, days: 75,  price: 4318, mrp: 5397, onlinePrice: null, label: '3 tubs · 75 days' },
-    { tubs: 4, days: 100, price: 5757, mrp: 7196, onlinePrice: null, label: '4 tubs · 100 days', recommended: true }
+    { tubs: 2, days: 50,  price: 2878, mrp: 3598, onlinePrice: 2734, label: '2 tubs · 50 days' },
+    { tubs: 3, days: 75,  price: 4318, mrp: 5397, onlinePrice: 4102, label: '3 tubs · 75 days' },
+    { tubs: 4, days: 100, price: 5757, mrp: 7196, onlinePrice: 5469, label: '4 tubs · 100 days · Recommended', recommended: true }
   ],
   PER_DAY: 58,              // ₹1,439 ÷ 25 servings ≈ ₹58; identical for every pack (linear pricing)
   RATING: { average: 4.74, count: 571, dist: { 5: 424, 4: 146, 3: 1, 2: 0, 1: 0 } },
@@ -20,7 +20,9 @@ window.WN = {
     { name: 'Pranvi .', stars: 5, verified: true, date: null,
       text: 'Pure Korean Marine Collagen Peptides | Unflavored | Combat Signs of Ageing' },
     { name: 'Siddharth Kaul', stars: 5, verified: true, date: null,
-      text: 'Pure Korean Marine Collagen Peptides | Unflavored | Combat Signs of Ageing' }
+      text: 'Pure Korean Marine Collagen Peptides | Unflavored | Combat Signs of Ageing' },
+    { name: '[V] review text unavailable', stars: 3, verified: true, date: null,
+      text: '[V] The text for this 3-star review was not available in the captured product-page data.' }
   ],
   VEGAN_URL: 'https://wellbeingnutrition.com/collections/vegan-collagen',
   DECK_URL: ''              // V: paste the public link to the strategy deck here
@@ -38,8 +40,8 @@ window.WN.rupees = function (n) {
 };
 
 /* Shared order logic used by the product page, checkout and confirmation.
-   Returns { amount, confirmed }. Online prices for 2–4 tubs are unconfirmed (V),
-   so the pack price is shown and flagged rather than an invented discount. */
+   Prepaid prices apply the same 5% discount to every pack and are rounded to
+   the nearest rupee, matching the displayed 1-tub price. */
 window.WN.totalFor = function (pack, method) {
   if (method === 'online') {
     if (pack.onlinePrice != null) return { amount: pack.onlinePrice, confirmed: true };

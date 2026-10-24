@@ -5,6 +5,19 @@
   var $ = function (id) { return document.getElementById(id); };
   var state = { pack: WN.packFromUrl().pack };
 
+  /* Keep the evidence module after the purchase actions and before reviews. */
+  var evidence = $('evidence');
+  var ctas = $('ctas');
+  var reviews = $('reviews');
+  var usage = document.querySelector('#evidence .usage');
+  var suitability = $('suitability');
+  if (evidence && ctas && reviews) {
+    reviews.parentNode.insertBefore(evidence, reviews);
+  }
+  if (usage && suitability) {
+    suitability.parentNode.insertBefore(usage, suitability);
+  }
+
   /* ---------- pack selector ---------- */
   function renderPacks() {
     var html = WN.PACKS.map(function (p) {
@@ -13,14 +26,14 @@
         '<input type="radio" name="pack" id="' + id + '" value="' + p.tubs + '">' +
         '<label for="' + id + '">' +
           '<span><span class="pack-name">' + WN.esc(p.label) + '</span>' +
-            (p.recommended ? '<span class="tag">Recommended</span>' : '') +
+            '<br><span class="pack-day">about ₹' + WN.PER_DAY + ' a day</span>' +
             '<br><span class="tag offer" style="margin-left:0">Save 20%</span></span>' +
           '<span class="pack-price"><b>' + WN.rupees(p.price) + '</b><s>' + WN.rupees(p.mrp) + '</s></span>' +
         '</label></div>';
     }).join('');
     $('pack-options').innerHTML = html;
     $('sticky-select').innerHTML = WN.PACKS.map(function (p) {
-      return '<option value="' + p.tubs + '">' + WN.esc(p.label) + (p.recommended ? ' · Recommended' : '') + '</option>';
+      return '<option value="' + p.tubs + '">' + WN.esc(p.label) + '</option>';
     }).join('');
     document.querySelectorAll('input[name="pack"]').forEach(function (r) {
       r.addEventListener('change', function () { setPack(r.value); });
@@ -53,7 +66,7 @@
       $('offer-online').textContent = WN.rupees(online.amount) + ' for ' + p.label.split(' · ')[0];
     } else {
       $('price-online').innerHTML = 'Online price for ' + WN.esc(p.label.split(' · ')[0]) + ': <span class="v">[V] to be confirmed</span>';
-      $('offer-online').innerHTML = '₹1,367 for 1 tub; for ' + WN.esc(p.label.split(' · ')[0]) + ' <span class="v">[V] to be confirmed</span>';
+      $('offer-online').innerHTML = 'Online price for ' + WN.esc(p.label.split(' · ')[0]) + ': <span class="v">[V] to be confirmed</span>';
     }
     $('sticky-price').textContent = WN.rupees(p.price) + ' · ' + p.label;
     var href = 'checkout.html?tubs=' + p.tubs;
@@ -68,6 +81,28 @@
     var p = state.pack;
     $('cart-status').innerHTML = 'Added ' + WN.esc(p.label) + ' to your cart. <a href="checkout.html?tubs=' + p.tubs + '">Go to checkout</a>';
   });
+  $('sticky-add-to-cart').addEventListener('click', function () {
+    $('add-to-cart').click();
+  });
+
+  /* On desktop, show the quick-buy footer only after the primary CTAs leave view. */
+  var stickyBar = $('sticky-bar');
+  var ctaVisibility = window.matchMedia('(min-width: 1024px)');
+  function syncStickyBar() {
+    if (!ctaVisibility.matches) {
+      stickyBar.classList.add('is-visible');
+      stickyBar.setAttribute('aria-hidden', 'false');
+      return;
+    }
+    var rect = $('ctas').getBoundingClientRect();
+    var visible = rect.bottom > 0 && rect.top < window.innerHeight;
+    stickyBar.classList.toggle('is-visible', !visible);
+    stickyBar.setAttribute('aria-hidden', visible ? 'true' : 'false');
+  }
+  syncStickyBar();
+  window.addEventListener('scroll', syncStickyBar, { passive: true });
+  window.addEventListener('resize', syncStickyBar);
+  if (ctaVisibility.addEventListener) ctaVisibility.addEventListener('change', syncStickyBar);
 
   /* ---------- suitability panel: open on laptop, collapsible on phone ---------- */
   var mq = window.matchMedia('(min-width: 1024px)');
