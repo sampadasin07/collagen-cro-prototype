@@ -25,7 +25,7 @@ window.WN = {
       text: '[V] The text for this 3-star review was not available in the captured product-page data.' }
   ],
   VEGAN_URL: 'https://wellbeingnutrition.com/collections/vegan-collagen',
-  DECK_URL: ''              // V: paste the public link to the strategy deck here
+  DECK_URL: 'pssol.pdf'              
 };
 
 window.WN.getPack = function (tubs) {
