@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pure Korean Marine Collagen Peptides · Improved product page (prototype)</title>
+<meta name="description" content="CRO case-study prototype of an improved product page. Not the official website.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="has-sticky">
+
+<div class="proto-note">Concept prototype for a CRO case study, not the official website · <a href="about.html">About this prototype</a></div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Wellbeing Nutrition <span style="font-weight:400;color:#56676C">· prototype</span></a>
+    <div class="header-actions">
+      <button type="button" class="btn btn-secondary btn-small" id="toggle-changes" aria-pressed="false">Show what changed</button>
+      <a class="btn btn-secondary btn-small" href="about.html">About</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="product">
+
+    <!-- 1. Gallery -->
+    <figure class="gallery" style="margin:0">
+      <img src="img/tub.svg" width="400" height="400" alt="Illustration of a 200 g tub of unflavoured Korean marine collagen peptides">
+      <figcaption>Product photos go here in the real page. Illustration used in this prototype.</figcaption>
+    </figure>
+
+    <div class="buybox">
+      <details class="chg">
+        <summary><span class="chg-num">1</span>Fixes to the current page</summary>
+        <div class="chg-body">
+          <p><b>What changed:</b> removed “Only 13237 left in stock”, the “might run Out of Stock” exit pop-up, the “allergen-free” claim, the “Clinically Proven” badge, the “Backed by 20+ Clinical Studies” line and all absorption multipliers (4x, 1.5x, 5x); corrected journal publishers; Buy It Now now goes straight to checkout.</p>
+          <p style="margin:0"><b>Friction addressed:</b> Friction 1 (the evidence isn’t believable) and Friction 3 (checkout adds pressure). These are factual and compliance fixes, so they ship without testing.</p>
+        </div>
+      </details>
+
+      <!-- 2. Title -->
+      <div>
+        <h1>Pure Korean Marine Collagen Peptides | Unflavoured | Combat Signs of Ageing</h1>
+        <p class="subtitle">Hydrolysed Type I &amp; III collagen peptides from deep-sea fish · 8 g per serving · 200 g tub</p>
+      </div>
+
+      <!-- 3. Rating -->
+      <div class="rating-line">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span><b id="avg-inline">4.74</b>/5 from <span id="count-inline">571</span> ratings</span>
+        <a href="#reviews">Read reviews</a>
+      </div>
+
+      <!-- 4. Price -->
+      <details class="chg">
+        <summary><span class="chg-num">4</span>Price and offer block</summary>
+        <div class="chg-body">
+          <p><b>What changed:</b> one headline price everyone pays (the COD price), the online price shown directly beneath instead of only at the payment step, all offers gathered in one “Offers that apply” block, and free shipping shown on the page.</p>
+          <p style="margin:0"><b>Friction addressed:</b> the unclear final price (about eight offer messages; best price shown only at payment).</p>
+        </div>
+      </details>
+      <section class="price-block" aria-label="Price">
+        <div class="price-row">
+          <span class="price-now" id="price-now">₹1,439</span>
+          <span class="price-mrp">MRP <s id="price-mrp">₹1,799</s></span>
+          <span class="price-off">20% off</span>
+        </div>
+        <p class="per-pack-note" id="price-pack">for 1 tub · 25 days · inclusive of all taxes</p>
+        <p class="price-online" id="price-online">₹1,367 when you pay online</p>
+        <p class="price-ship">✓ Free shipping on this order</p>
+      </section>
+
+      <!-- 5. Offers -->
+      <details class="panel" id="offers">
+        <summary>Offers that apply</summary>
+        <div class="panel-body">
+          <ul>
+            <li><b>Flat 20% off</b> MRP: already included in the price above.</li>
+            <li><b>Extra 5% off on online (prepaid) payment:</b> <span id="offer-online">₹1,367 for 1 tub</span>.</li>
+            <li><b>Member price ₹1,367</b> for 1 tub (join the membership).</li>
+            <li><b>Get 10% OFF</b> sign-up offer: <span class="v">[V] terms to be confirmed</span></li>
+          </ul>
+          <p class="v-note" style="margin-top:10px"><span class="v">[V]</span> Which of these offers can be combined is being confirmed with the brand. Stacking rules will be stated here.</p>
+        </div>
+      </details>
+
+      <!-- 6. Suitability panel -->
+      <details class="chg">
+        <summary><span class="chg-num">5</span>Suitability and safety panel</summary>
+        <div class="chg-body">
+          <p><b>What changed:</b> non-veg status, fish and shellfish allergy, a doctor note, best-before date, the replacement policy and a vegan alternative moved directly under the price, using the pack-label wording. The “allergen-free” claim was removed.</p>
+          <p style="margin:0"><b>Friction addressed:</b> suitability and safety facts were buried in a spec table and long text, so buyers had to hunt or leave.</p>
+        </div>
+      </details>
+      <details class="panel" id="suitability" open>
+        <summary>Is it right for me?</summary>
+        <div class="panel-body">
+          <ul class="suit-list">
+            <li><span class="nonveg" role="img" aria-label="Non-vegetarian symbol"></span><span><b>Non-veg.</b> Made from fish.</span></li>
+            <li><span class="icon-dot" aria-hidden="true">!</span><span>Contains fish. Not suitable if you’re allergic to fish or shellfish.</span></li>
+            <li><span class="icon-dot" aria-hidden="true">+</span><span>Pregnant, breastfeeding, on medication or managing a health condition? Consult your doctor first.</span></li>
+            <li><span class="icon-dot" aria-hidden="true">◷</span><span>Best before: <span class="v">[V] MM/YYYY</span></span></li>
+            <li><span class="icon-dot" aria-hidden="true">↺</span><span>Replacement if damaged or incorrect (report within 48 hours). <a href="about.html#policy">Read the policy</a></span></li>
+            <li><span class="icon-dot" aria-hidden="true">✿</span><span>Vegetarian? <a id="vegan-link" href="https://wellbeingnutrition.com/collections/vegan-collagen" target="_blank" rel="noopener">See our vegan collagen →</a></span></li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- 7. Pack selector -->
+      <details class="chg">
+        <summary><span class="chg-num">3</span>Regimen-based pack selector</summary>
+        <div class="chg-body">
+          <p><b>What changed:</b> packs are labelled by how long they last, with the cost per day, so the buyer can see that one tub covers 25 days while the label asks for a minimum of 3–4 months. The single tub stays the default; prices and offers are unchanged and no discount was added.</p>
+          <p style="margin:0"><b>Friction addressed:</b> Friction 2 (the real commitment is hidden).</p>
+        </div>
+      </details>
+      <section aria-label="Choose a pack">
+        <fieldset class="packs">
+          <legend>Choose your pack</legend>
+          <div class="pack-options" id="pack-options"><!-- rendered from data.js --></div>
+        </fieldset>
+        <p class="per-day">Every pack works out to about ₹<span id="per-day">58</span> a day.</p>
+        <p class="course-note" id="course-note" hidden>4 tubs: covers the 3–4 month course on the pack <span class="v">[V]</span></p>
+      </section>
+
+      <!-- 8. CTAs -->
+      <div class="cta-row" id="ctas">
+        <button type="button" class="btn btn-secondary" id="add-to-cart">Add to cart</button>
+        <a class="btn btn-primary" id="buy-now" href="checkout.html?tubs=1">Buy it now</a>
+      </div>
+      <p class="cart-status" id="cart-status" role="status" aria-live="polite"></p>
+
+      <!-- Review summary near the buy box -->
+      <div class="featured-review" id="featured-review" aria-label="Featured review"><!-- rendered --></div>
+    </div>
+  </div>
+
+  <!-- Benefit icons (existing) -->
+  <section class="section" aria-labelledby="benefits-h">
+    <h2 id="benefits-h" class="visually-hidden">Benefits</h2>
+    <ul class="benefits">
+      <li>Reduce signs of ageing</li>
+      <li>Enhances skin firmness &amp; elasticity</li>
+      <li>Improves skin hydration</li>
+      <li>Smooths and refines skin texture</li>
+      <li>Supports the collagen density</li>
+      <li>Enhances joint health</li>
+    </ul>
+    <p class="disclaimer" style="margin-top:10px">*Claims are ingredient-based and not for the product.</p>
+  </section>
+
+  <!-- 9. Evidence module (directly below the benefit icons) -->
+  <section class="section" id="evidence" aria-labelledby="evidence-h">
+    <details class="chg">
+      <summary><span class="chg-num">2</span>Consistent evidence module</summary>
+      <div class="chg-body">
+        <p><b>What changed:</b> one usage line from the pack label replaces four different results timelines; absorption multipliers removed; one nutrition panel; research on the ingredient clearly separated from tests on this product; quick facts gathered in one row.</p>
+        <p style="margin:0"><b>Friction addressed:</b> Friction 1 (the evidence isn’t believable: claims contradicted each other).</p>
+      </div>
+    </details>
+    <h2 id="evidence-h">What it is and how to use it</h2>
+    <p class="usage"><strong>How to use</strong>Take one 8 g scoop daily, for a minimum of 3–4 months.</p>
+    <ul class="quick-facts" aria-label="Quick facts">
+      <li><b>8 g</b><span>per scoop</span></li>
+      <li><b>25</b><span>servings per tub</span></li>
+      <li><b>Type I &amp; III</b><span>collagen peptides</span></li>
+      <li><b>Unflavoured</b><span>no added flavour</span></li>
+      <li><b>How to mix</b><span>stir 1 scoop into water, coffee, juice or a smoothie</span></li>
+    </ul>
+
+    <div class="evidence-grid">
+      <div class="ev-card">
+        <h3>Research on marine collagen peptides (ingredient studies)</h3>
+        <p class="disclaimer">These studies looked at collagen peptides as an ingredient. They were not done on this product.</p>
+        <div class="study">
+          <p style="margin:0"><b>Oral collagen peptides, skin moisture and the skin’s collagen network.</b> Tested in skin samples and in randomised trials.</p>
+          <p class="meta" style="margin:0">Journal of Cosmetic Dermatology (Wiley), 2015</p>
+        </div>
+        <div class="study">
+          <p style="margin:0"><b>A marine collagen supplement and skin wrinkles and elasticity.</b> Randomised, triple-blind, placebo-controlled trial.</p>
+          <p class="meta" style="margin:0">Journal of Cosmetic Dermatology (Wiley), 2021</p>
+        </div>
+        <div class="study">
+          <p style="margin:0"><b>Low-molecular-weight collagen peptides and skin wrinkles.</b> Randomised, double-blind, placebo-controlled trial.</p>
+          <p class="meta" style="margin:0">Journal of Medicinal Food (Mary Ann Liebert), 2022</p>
+        </div>
+        <div class="study">
+          <p style="margin:0"><b>Type I collagen hydrolysate and bones, muscles and joints.</b> A systematic review of earlier studies.</p>
+          <p class="meta" style="margin:0">Orthopedic Reviews, 2025 · publisher <span class="v">[V]</span></p>
+        </div>
+        <p class="v-note" style="margin:8px 0 0"><span class="v">[V]</span> Full citations and links to be added from the brand’s study list.</p>
+      </div>
+
+      <div class="ev-card">
+        <h3>Tested on this product</h3>
+        <p>Third-party lab reports for this product cover:</p>
+        <ul class="lab-list">
+          <li>Heavy metals</li>
+          <li>Microbial contamination</li>
+          <li>Contaminant residues</li>
+          <li>FSSAI and USFDA reports</li>
+        </ul>
+        <p><b>What they show:</b> whether a tested batch meets limits for these contaminants.</p>
+        <p><b>What they don’t show:</b> any effect on skin, hair, nails or joints.</p>
+        <p style="margin:0">View lab report: <span class="v">[V] report links not available in this prototype</span></p>
+
+        <h3 style="margin-top:22px">Nutrition information</h3>
+        <p class="disclaimer" style="margin-bottom:6px">Serving size 8 g (1 level scoop) · 25 servings per tub</p>
+        <table class="nutrition" aria-describedby="nutri-note">
+          <thead><tr><th>Per serving (8 g)</th><th>Amount</th></tr></thead>
+          <tbody>
+            <tr><td>Energy</td><td><span class="v">[V]</span></td></tr>
+            <tr><td>Protein</td><td><span class="v">[V]</span></td></tr>
+            <tr><td>Carbohydrate</td><td><span class="v">[V]</span></td></tr>
+            <tr><td>Total fat</td><td><span class="v">[V]</span></td></tr>
+            <tr><td>Sodium</td><td><span class="v">[V]</span></td></tr>
+          </tbody>
+        </table>
+        <p class="v-note" id="nutri-note" style="margin:6px 0 0"><span class="v">[V]</span> to be confirmed against the approved label.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Reviews -->
+  <section class="section" id="reviews" aria-labelledby="reviews-h">
+    <details class="chg">
+      <summary><span class="chg-num">6</span>Believable reviews</summary>
+      <div class="chg-body">
+        <p><b>What changed:</b> a rating summary and a real, representative review near the buy box; a date shown on every review; a “Critical” filter; negative reviews shown in the list. No reviews were added or edited.</p>
+        <p style="margin:0"><b>Friction addressed:</b> Friction 1 (reviews looked curated: 4.74 from 571 ratings with no one- or two-star reviews).</p>
+      </div>
+    </details>
+    <h2 id="reviews-h">Customer reviews</h2>
+    <div class="review-summary">
+      <div>
+        <div class="avg" id="avg">4.74</div>
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <div>Based on <span id="count">571</span> ratings</div>
+      </div>
+      <ul class="dist" id="dist" aria-label="Rating distribution"><!-- rendered --></ul>
+    </div>
+    <div class="filters" role="group" aria-label="Filter reviews">
+      <button type="button" class="btn btn-secondary btn-small" data-filter="all" aria-pressed="true">All reviews</button>
+      <button type="button" class="btn btn-secondary btn-small" data-filter="critical" aria-pressed="false">Critical (3★ and below)</button>
+    </div>
+    <div id="review-list" aria-live="polite"><!-- rendered --></div>
+  </section>
+
+  <!-- 11. FAQ -->
+  <section class="section faq" id="faq" aria-labelledby="faq-h">
+    <h2 id="faq-h">Frequently asked questions</h2>
+    <details class="panel"><summary>What are marine collagen peptides?</summary>
+      <div class="panel-body"><p style="margin:0">Short chains of amino acids made from fish skin or scales, rich in Type I and Type III collagen.</p></div></details>
+    <details class="panel"><summary>How much should I take, and for how long?</summary>
+      <div class="panel-body"><p style="margin:0">Take one 8 g scoop daily, for a minimum of 3–4 months.</p></div></details>
+    <details class="panel"><summary>Can I mix it into hot drinks?</summary>
+      <div class="panel-body"><p style="margin:0">Yes. It dissolves in hot or cold drinks such as coffee, tea, juice or smoothies.</p></div></details>
+    <details class="panel"><summary>Can vegetarians use this collagen?</summary>
+      <div class="panel-body"><p style="margin:0">No. This product is made from fish, so it is not suitable for vegetarians. <a href="https://wellbeingnutrition.com/collections/vegan-collagen" target="_blank" rel="noopener">See our vegan collagen</a>.</p></div></details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Prototype for a CRO case study. No orders are placed and no payment is taken. Prices as observed on the live page on 21 Oct 2026.</p>
+    <p style="margin:0"><a href="about.html">About this prototype: what changed and why</a></p>
+  </div>
+</footer>
+
+<!-- Sticky bar (phone only) -->
+<div class="sticky-bar" id="sticky-bar" aria-label="Quick buy">
+  <div>
+    <label for="sticky-select">Pack</label>
+    <select id="sticky-select"><!-- rendered --></select>
+    <div class="sticky-price" id="sticky-price">₹1,439</div>
+  </div>
+  <a class="btn btn-primary" id="sticky-buy" href="checkout.html?tubs=1">Buy it now</a>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

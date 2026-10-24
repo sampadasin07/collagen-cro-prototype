@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout · prototype</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="proto-note">Concept prototype for a CRO case study, not the official website · <a href="about.html">About this prototype</a></div>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Wellbeing Nutrition <span style="font-weight:400;color:#56676C">· prototype</span></a>
+    <div class="header-actions">
+      <button type="button" class="btn btn-secondary btn-small" id="toggle-changes" aria-pressed="false">Show what changed</button>
+      <a class="btn btn-secondary btn-small" id="back-link" href="index.html">Back to product</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 style="margin-top:20px">Checkout</h1>
+  <p class="notice" role="note">Prototype: no payment is taken.</p>
+  <p class="v-note" id="invalid-note" hidden>The pack in the link wasn’t recognised, so the default pack (1 tub) is shown.</p>
+
+  <form class="checkout" id="checkout-form" novalidate>
+    <div>
+      <section class="card" aria-labelledby="contact-h">
+        <h2 id="contact-h">Delivery details</h2>
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" autocomplete="name" required aria-describedby="name-err">
+          <div class="error" id="name-err"></div>
+        </div>
+        <div class="field">
+          <label for="phone">Mobile number (10 digits)</label>
+          <input id="phone" name="phone" inputmode="numeric" autocomplete="tel-national" maxlength="10" required aria-describedby="phone-err">
+          <div class="error" id="phone-err"></div>
+        </div>
+        <div class="field">
+          <label for="address">Address</label>
+          <textarea id="address" name="address" rows="3" autocomplete="street-address" required aria-describedby="address-err"></textarea>
+          <div class="error" id="address-err"></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="pay-h" style="margin-top:20px">
+        <h2 id="pay-h">Payment method</h2>
+        <fieldset style="border:0;padding:0;margin:0">
+          <legend class="visually-hidden">Payment method</legend>
+          <label class="choice"><input type="radio" name="pay" value="cod" checked> Cash on delivery <span class="choice-price" id="price-cod">₹1,439</span></label>
+          <label class="choice"><input type="radio" name="pay" value="online"> Pay online (UPI, card, netbanking) <span class="choice-price" id="price-online-opt">₹1,367</span></label>
+        </fieldset>
+      </section>
+
+      <section class="card" aria-labelledby="consent-h" style="margin-top:20px">
+        <details class="chg">
+          <summary><span class="chg-num">7</span>Checkout consent</summary>
+          <div class="chg-body">
+            <p><b>What changed:</b> order updates and offers are two separate boxes, both unticked, with no warning when left unticked. Prices match the product page; there is no exit pop-up, countdown or “out of stock” message.</p>
+            <p style="margin:0"><b>Friction addressed:</b> Friction 3 (checkout adds pressure and removes control: one pre-ticked box bundled order updates with offers and showed a red warning when unticked).</p>
+          </div>
+        </details>
+        <h2 id="consent-h">Messages</h2>
+        <label class="choice"><input type="checkbox" name="updates" id="consent-updates"> Send me order updates</label>
+        <label class="choice"><input type="checkbox" name="offers" id="consent-offers"> Send me offers</label>
+      </section>
+    </div>
+
+    <aside class="card" aria-labelledby="summary-h">
+      <h2 id="summary-h">Order summary</h2>
+      <div class="order-line"><span id="sum-pack">1 tub · 25 days</span><span id="sum-price">₹1,439</span></div>
+      <div class="order-line"><span>MRP</span><s id="sum-mrp">₹1,799</s></div>
+      <div class="order-line"><span>Shipping</span><span>Free</span></div>
+      <div class="order-line"><span>Payment</span><span id="sum-method">Cash on delivery</span></div>
+      <div class="order-line order-total"><span>Total</span><span id="sum-total">₹1,439</span></div>
+      <p class="v-note" id="sum-note" hidden></p>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:12px">Place order (prototype)</button>
+      <p style="font-size:15px;color:#56676C;margin:10px 0 0">No order is created and no payment is taken.</p>
+    </aside>
+  </form>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

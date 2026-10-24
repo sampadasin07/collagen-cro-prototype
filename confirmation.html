@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order confirmation · prototype</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="proto-note">Concept prototype for a CRO case study, not the official website · <a href="about.html">About this prototype</a></div>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Wellbeing Nutrition <span style="font-weight:400;color:#56676C">· prototype</span></a>
+    <div class="header-actions"><a class="btn btn-secondary btn-small" href="about.html">About</a></div>
+  </div>
+</header>
+<main class="wrap" style="padding:24px 16px 48px;max-width:720px">
+  <h1>Order placed (prototype)</h1>
+  <p class="notice" role="note">Prototype: no payment is taken and no real order was created.</p>
+  <section class="card" aria-labelledby="conf-h">
+    <h2 id="conf-h">Your order</h2>
+    <div class="order-line"><span>Pack</span><span id="c-pack"></span></div>
+    <div class="order-line"><span>Payment method</span><span id="c-method"></span></div>
+    <div class="order-line"><span>Shipping</span><span>Free</span></div>
+    <div class="order-line order-total"><span>Total</span><span id="c-total"></span></div>
+    <p class="v-note" id="c-note" hidden></p>
+  </section>
+  <p style="margin-top:20px"><a class="btn btn-secondary" href="index.html">Back to the product page</a></p>
+</main>
+<script src="js/data.js"></script>
+<script>
+(function () {
+  var WN = window.WN, $ = function (id) { return document.getElementById(id); };
+  var pack = WN.packFromUrl().pack;
+  var pay = new URLSearchParams(location.search).get('pay') === 'online' ? 'online' : 'cod';
+  var t = WN.totalFor(pack, pay);
+  $('c-pack').textContent = pack.label;
+  $('c-method').textContent = pay === 'online' ? 'Pay online' : 'Cash on delivery';
+  $('c-total').textContent = WN.rupees(t.amount);
+  if (!t.confirmed) { $('c-note').hidden = false; $('c-note').innerHTML = '<span class="v">[V]</span> Online price for this pack not confirmed; pack price shown.'; }
+})();
+</script>
+</body>
+</html>

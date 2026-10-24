@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About this prototype</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="proto-note">Concept prototype for a CRO case study, not the official website</div>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Wellbeing Nutrition <span style="font-weight:400;color:#56676C">· prototype</span></a>
+    <div class="header-actions"><a class="btn btn-primary btn-small" href="index.html">Open the improved page</a></div>
+  </div>
+</header>
+
+<main class="wrap about" style="max-width:900px;padding-bottom:48px">
+  <h1 style="margin-top:20px">About this prototype</h1>
+  <p>This is a responsive HTML prototype of an improved product page for Wellbeing Nutrition’s Pure Korean Marine Collagen Peptides. It implements the phase-1 changes from my CRO strategy and demonstrates the main purchase journey: product page → pack choice → checkout → confirmation. Use <b>Show what changed</b> on the product page or checkout to see each change and the friction it addresses.</p>
+  <p id="deck-line">Full strategy deck: <span id="deck-slot"><span class="v">[V] add the deck link in js/data.js (DECK_URL)</span></span></p>
+
+  <section aria-labelledby="f-h">
+    <h2 id="f-h">The three priority frictions</h2>
+    <table>
+      <thead><tr><th style="width:8%">#</th><th style="width:32%">Friction</th><th>What the buyer meets on the current page</th></tr></thead>
+      <tr><td>1</td><td><b>The evidence isn’t believable</b></td><td>“Backed by 20+ Clinical Studies” sits above “claims are ingredient-based and not for the product”; results promised in 4–8 weeks, 8–12 weeks, 12 weeks and 3–4 months; absorption claimed as 4x, 1.5x and 5x; two nutrition panels disagree; 4.74★ from 571 ratings with no one- or two-star reviews.</td></tr>
+      <tr><td>2</td><td><b>The real commitment is hidden</b></td><td>One tub lasts about 25 days but the label asks for a minimum of 3–4 months; packs are priced linearly and every one says “Save 20%”; no cost per day.</td></tr>
+      <tr><td>3</td><td><b>Checkout adds pressure and removes control</b></td><td>One pre-ticked box bundling order updates with offers, a red warning when unticked, a “might run Out of Stock” exit pop-up, and “Your cart is empty” after Buy It Now.</td></tr>
+    </table>
+  </section>
+
+  <section aria-labelledby="i-h">
+    <h2 id="i-h">The five interventions, ranked by ICE</h2>
+    <p>ICE = (Impact + Confidence + Ease) ÷ 3. Scores are judgement on a written rubric, not measured effects.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>#</th><th>Intervention</th><th>ICE</th><th>In this prototype</th></tr></thead>
+      <tr><td>1</td><td>Consistent evidence module</td><td>7.0</td><td>One label usage line; quick facts; ingredient studies separated from product lab reports; one nutrition panel (values [V]); multipliers removed</td></tr>
+      <tr><td>2</td><td>Regimen-based pack selector</td><td>7.0</td><td>Packs labelled by duration, “about ₹58 a day”, 4 tubs “Recommended”, 1 tub default, prices unchanged</td></tr>
+      <tr><td>3</td><td>Transparent price and offer block</td><td>6.7</td><td>Headline ₹1,439, “₹1,367 when you pay online”, one “Offers that apply” block, free shipping shown</td></tr>
+      <tr><td>4</td><td>Suitability and safety panel</td><td>6.7</td><td>Non-veg and fish, allergy, doctor note, best-before [V], replacement policy, vegan link under the price</td></tr>
+      <tr><td>5</td><td>Believable reviews</td><td>6.3</td><td>Rating summary and a real review near the buy box, dates shown, “Critical” filter</td></tr>
+    </table>
+    </div>
+    <p>Intervention 1 goes first: it fixes the credibility problem at the core of the decision, uses wording the brand has already approved, and the pack selector depends on it. Factual and compliance fixes (stock count, exit pop-up, “allergen-free”, publisher names, consent box, cart error) ship regardless of ranking.</p>
+  </section>
+
+  <section aria-labelledby="v-h">
+    <h2 id="v-h">What the <span class="v">[V]</span> placeholders mean</h2>
+    <p><span class="v">[V]</span> marks a fact that hasn’t been confirmed yet. It is shown as a placeholder rather than a guessed value:</p>
+    <ul>
+      <li>Nutrition values per serving (the live page shows two panels that disagree, e.g. protein 7.9 g vs 7.45 g).</li>
+      <li>Online price for 2–4 tubs (only the 1-tub online price, ₹1,367, was observed).</li>
+      <li>Offer-stacking rules and the terms of the “Get 10% OFF” offer.</li>
+      <li>The batch best-before date.</li>
+      <li>Review dates, and the text of the single 3★ rating.</li>
+      <li>Whether 100 days “covers the 3–4 month course” (it covers the 3-month minimum).</li>
+      <li>Lab-report links, full study citations and the publisher of <i>Orthopedic Reviews</i>.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="n-h">
+    <h2 id="n-h">Deliberately not built</h2>
+    <ul>
+      <li>Course discount, subscription, starter or sachet pack, and a 4-tub default (later tests, not phase 1).</li>
+      <li>Pincode delivery date.</li>
+      <li>Amazon or Nykaa reviews.</li>
+      <li>Autoplay video, sign-up pop-up and spin-to-win pop-up.</li>
+      <li>Backend, real payments, real A/B testing or analytics.</li>
+    </ul>
+    <p>The FAQ shows a short subset of the live page’s questions; answers that gave a different results timeline were aligned to the pack-label usage line. Product photos are replaced with an illustration.</p>
+  </section>
+
+  <section aria-labelledby="r-h">
+    <h2 id="r-h">No results are claimed</h2>
+    <p>This prototype shows how the changes would work. It does not show that conversion would improve. Test 1 (evidence module) would measure add-to-cart rate, and Test 2 (pack selector, framing only) would measure revenue per visitor, each with guardrails on purchase and COD conversion, on the real site with real traffic.</p>
+    <p style="margin:0">Prices are as observed on the live page on <span id="observed">21 Oct 2026</span>.</p>
+  </section>
+
+  <section id="policy" aria-labelledby="p-h">
+    <h2 id="p-h">Replacement policy (as observed on the live site)</h2>
+    <p style="margin:0">Replacements are offered only if the item is damaged in transit, defective or incorrect, reported with photos within 48 hours of delivery. Opened or used products can’t be returned.</p>
+  </section>
+</main>
+<script src="js/data.js"></script>
+<script>
+(function () {
+  var url = window.WN.DECK_URL;
+  if (url) {
+    var a = document.createElement('a');
+    a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'open the deck';
+    var slot = document.getElementById('deck-slot'); slot.innerHTML = ''; slot.appendChild(a);
+  }
+  document.getElementById('observed').textContent = window.WN.PRICES_OBSERVED;
+})();
+</script>
+</body>
+</html>
